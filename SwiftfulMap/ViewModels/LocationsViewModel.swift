@@ -1,0 +1,18 @@
+//
+//  LocationsViewModel.swift
+//  SwiftfulMap
+//
+//  Created by Danish Shaikh on 08/11/26.
+//
+
+import Foundation
+
+@Observable
+class LocationsViewModel {
+    var locations: [Location]
+    
+    init() {
+        let locations = LocationsDataService.locations
+        self.locations = locations
+    }
+}
