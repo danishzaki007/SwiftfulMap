@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+@Observable
+class LocationsViewModel {
+    var locations: [Location]
+    
+    init() {
+        self.locations = LocationsDataService.locations
+    }
+}
