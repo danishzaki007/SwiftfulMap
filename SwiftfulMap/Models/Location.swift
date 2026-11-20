@@ -1,0 +1,14 @@
+//
+//  Location.swift
+//  SwiftfulMap
+//
+//  Created by Danish Shaikh on 21/11/26.
+//
+
+import Foundation
+import MapKit
+
+struct Location {
+    let name: String
+    let cityName: String
+}
