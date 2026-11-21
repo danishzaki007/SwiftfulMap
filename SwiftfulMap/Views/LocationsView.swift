@@ -6,13 +6,63 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct LocationsView: View {
+    @Environment(LocationsViewModel.self) private var viewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        @Bindable var viewModel = viewModel
+        
+        ZStack {
+            Map(position: $viewModel.mapRegion)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                header
+                    .padding()
+                
+                Spacer()
+                
+            }
+        }
     }
 }
 
 #Preview {
     LocationsView()
+        .environment(LocationsViewModel())
+}
+
+extension LocationsView {
+    private var header: some View {
+        VStack {
+            Button {
+                viewModel.toggleLocationsList()
+            } label: {
+                Text("\(viewModel.mapLocation.name), \(viewModel.mapLocation.cityName)")
+                    .font(.title2)
+                    .fontWeight(.black)
+                    .foregroundStyle(.primary)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .overlay(alignment: .leading) {
+                        Image(systemName: viewModel.showLocationsList ? "arrow.up" : "arrow.down")
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                            .padding()
+                    }
+            }
+            .buttonStyle(.plain)
+            
+            if viewModel.showLocationsList {
+                LocationsListView()
+                    .environment(viewModel)
+            }
+            
+        }
+        .background(.thinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 20)
+    }
 }
