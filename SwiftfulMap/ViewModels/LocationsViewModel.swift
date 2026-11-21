@@ -27,6 +27,9 @@ class LocationsViewModel {
     // Show list of locations
     var showLocationsList: Bool = false
     
+    // Show location detail via sheet
+    var sheetLocation: Location? = nil
+    
     init() {
         self.locations = LocationsDataService.locations
         self.mapLocation = LocationsDataService.locations.first!
