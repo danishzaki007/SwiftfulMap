@@ -15,7 +15,19 @@ struct LocationsView: View {
         @Bindable var viewModel = viewModel
         
         ZStack {
-            Map(position: $viewModel.mapRegion)
+            Map(position: $viewModel.mapRegion) {
+                ForEach(viewModel.locations) { location in
+                    Annotation(location.name, coordinate: location.coordinates) {
+                        LocationMapAnnotationView()
+                            .scaleEffect(viewModel.mapLocation == location ? 1: 0.7)
+                            .shadow(radius: 10)
+                            .onTapGesture {
+                                viewModel.showNextLocation(location: location)
+                            }
+                    }
+                }
+            }
+                .environment(LocationsViewModel())
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -24,6 +36,16 @@ struct LocationsView: View {
                 
                 Spacer()
                 
+                ZStack {
+                    ForEach(viewModel.locations) { location in
+                        if (viewModel.mapLocation == location) {
+                            LocationPreviewView(location: location)
+                                .shadow(color: Color.black.opacity(0.3), radius: 20)
+                                .padding()
+                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        }
+                    }
+                }
             }
         }
     }
