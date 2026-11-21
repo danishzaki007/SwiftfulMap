@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct LocationsListView: View {
+    @Environment(LocationsViewModel.self) private var viewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(viewModel.locations) { location in
+                Button {
+                    viewModel.showNextLocation(location: location)
+                } label: {
+                    listRowView(location: location)
+                }
+                .padding(.vertical, 4)
+                .listRowBackground(Color.clear)
+            }
+        }
+        .listStyle(.plain)
     }
 }
 
