@@ -29,3 +29,26 @@ struct LocationsListView: View {
 #Preview {
     LocationsListView()
 }
+
+extension LocationsListView {
+    private func listRowView(location: Location) -> some View {
+        HStack {
+            if let imageName = location.imageNames.first {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 45, height: 45)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+            
+            VStack(alignment: .leading) {
+                Text(location.name)
+                    .font(.headline)
+                
+                Text(location.cityName)
+                    .font(.subheadline)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
