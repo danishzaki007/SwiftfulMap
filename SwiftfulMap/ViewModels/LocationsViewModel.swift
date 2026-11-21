@@ -21,7 +21,11 @@ class LocationsViewModel {
         }
     }
     
+    // Current region on map
     var mapRegion: MapCameraPosition = .region(MKCoordinateRegion())
+    
+    // Show list of locations
+    var showLocationsList: Bool = false
     
     init() {
         self.locations = LocationsDataService.locations
@@ -34,6 +38,19 @@ class LocationsViewModel {
     private func updateMapRegion(location: Location) {
         withAnimation(.easeInOut) {
             mapRegion = .region(MKCoordinateRegion(center: location.coordinates, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
+        }
+    }
+    
+    func toggleLocationsList() {
+        withAnimation(.easeInOut) {
+            showLocationsList.toggle()
+        }
+    }
+    
+    func showNextLocation(location: Location) {
+        withAnimation(.easeInOut) {
+            mapLocation = location
+            showLocationsList = false
         }
     }
 }
