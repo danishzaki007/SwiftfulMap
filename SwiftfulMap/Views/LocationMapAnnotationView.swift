@@ -9,7 +9,27 @@ import SwiftUI
 
 struct LocationMapAnnotationView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 0) {
+            Image(systemName: "map.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
+                .font(.headline)
+                .foregroundStyle(.white)
+                .padding()
+                .background(.accent.gradient)
+                .clipShape(RoundedRectangle(cornerRadius: 36))
+            
+            Image(systemName: "triangle.fill")
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(.accent.gradient)
+                .frame(width: 10, height: 10)
+                .rotationEffect(Angle(degrees: 180))
+                .offset(y: -3)
+//                .padding(.bottom, 40)
+
+        }
     }
 }
 
