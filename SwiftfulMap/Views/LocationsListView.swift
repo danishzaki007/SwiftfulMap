@@ -26,10 +26,6 @@ struct LocationsListView: View {
     }
 }
 
-#Preview {
-    LocationsListView()
-}
-
 extension LocationsListView {
     private func listRowView(location: Location) -> some View {
         HStack {
